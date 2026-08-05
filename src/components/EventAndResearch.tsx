@@ -593,6 +593,7 @@ export default function EventsAndResearch() {
             slidesPerView={1}
             loop={true}
             speed={600}
+            grabCursor={true}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
             breakpoints={{
@@ -676,6 +677,7 @@ export default function EventsAndResearch() {
           slidesPerView={1}
           loop={true}
           speed={600}
+          grabCursor={true}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           pagination={{ clickable: true }}
           breakpoints={{

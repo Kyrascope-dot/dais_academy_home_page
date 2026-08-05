@@ -1,25 +1,31 @@
 import { ArrowRight } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 export default function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.play().catch(() => {});
+  }, []);
+
   return (
     <section className="relative min-h-150 h-screen max-h-225 w-full overflow-hidden">
       {/* Background Image */}
 
       <div className="absolute inset-0 overflow-hidden">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
           className="absolute inset-0 h-full w-full object-cover"
-        >
-          <source
-            src="https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4"
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
+          src="https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4"
+        />
 
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/60" />
