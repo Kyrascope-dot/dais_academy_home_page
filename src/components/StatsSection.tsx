@@ -286,22 +286,29 @@ export default function StatsBanner() {
             {stats.map((item, index) => (
               <div
                 key={item.title}
-                className="group relative px-5 py-8 transition duration-500 md:px-6 md:py-10 lg:px-8 lg:py-12"
+                className="group relative px-4 py-4 transition duration-500 md:px-6 md:py-10 lg:px-8 lg:py-12"
               >
-                {/* Divider */}
+                {/* Vertical divider — mobile: between col 1 & 2, desktop: between all */}
+                {index % 2 !== 0 && (
+                  <div className="absolute left-0 top-1/2 h-3/4 w-px -translate-y-1/2 bg-slate-200 lg:hidden" />
+                )}
                 {index !== stats.length - 1 && (
-                  <div className="absolute right-0 top-1/2 hidden  h-48 w-px -translate-y-1/2 bg-slate-300 lg:block" />
+                  <div className="absolute right-0 top-1/2 hidden h-48 w-px -translate-y-1/2 bg-slate-300 lg:block" />
+                )}
+                {/* Horizontal divider — mobile only: between row 1 & row 2 */}
+                {index < 2 && (
+                  <div className="absolute bottom-0 left-1/2 h-px w-4/5 -translate-x-1/2 bg-slate-200 lg:hidden" />
                 )}
 
-                <h2 className="text-2xl font-extrabold tracking-tight text-[#19446a] transition group-hover:scale-105 md:text-2xl lg:text-4xl xl:text-6xl">
+                <h2 className="text-xl font-extrabold tracking-tight text-[#19446a] transition group-hover:scale-105 md:text-2xl lg:text-4xl xl:text-6xl">
                   {item.value}
                 </h2>
 
-                <h3 className="mt-3 text-base font-semibold md:mt-4 md:text-lg lg:mt-6 lg:text-xl">
+                <h3 className="mt-1 text-sm font-semibold md:mt-4 md:text-lg lg:mt-6 lg:text-xl">
                   {item.title}
                 </h3>
 
-                <p className="mt-2 text-sm leading-6 text-slate-500 md:mt-3 md:text-base md:leading-7">
+                <p className="mt-1 text-xs leading-5 text-slate-500 md:mt-3 md:text-base md:leading-7">
                   {item.description}
                 </p>
               </div>

@@ -40,7 +40,7 @@ export default function HeroSection() {
           preload="metadata"
           className="absolute inset-0 h-full w-full object-cover"
         >
-          <source src="/research-and-innovation.mp4" type="video/mp4" />
+          <source src="https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4" type="video/mp4" />
         </video>
 
         {/* Dark Overlay */}
