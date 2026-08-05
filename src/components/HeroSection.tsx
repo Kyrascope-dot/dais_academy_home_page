@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[600px] h-screen max-h-[900px] w-full overflow-hidden">
+    <section className="relative min-h-150 h-screen max-h-225 w-full overflow-hidden">
       {/* Background Image */}
 
       <div className="absolute inset-0 overflow-hidden">
