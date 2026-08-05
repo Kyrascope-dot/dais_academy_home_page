@@ -7,13 +7,28 @@ export default function HeroSection() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    video.muted = true;
-    video.play().catch(() => {});
+
+    const tryPlay = () => {
+      video.muted = true;
+      video.play().catch(() => {});
+    };
+
+    tryPlay();
+
+    video.addEventListener("loadeddata", tryPlay);
+    video.addEventListener("canplay", tryPlay);
+    document.addEventListener("touchstart", tryPlay, { once: true });
+
+    return () => {
+      video.removeEventListener("loadeddata", tryPlay);
+      video.removeEventListener("canplay", tryPlay);
+      document.removeEventListener("touchstart", tryPlay);
+    };
   }, []);
 
   return (
-    <section className="relative min-h-150 h-screen max-h-225 w-full overflow-hidden">
-      {/* Background Image */}
+    <section className="relative min-h-150 h-screen max-h-225 w-full overflow-hidden bg-slate-950">
+      {/* Background Video */}
 
       <div className="absolute inset-0 overflow-hidden">
         <video
@@ -22,17 +37,18 @@ export default function HeroSection() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           className="absolute inset-0 h-full w-full object-cover"
-          src="/research-and-innovation.mp4"
-        />
+        >
+          <source src="/research-and-innovation.mp4" type="video/mp4" />
+        </video>
 
         {/* Dark Overlay */}
-        {/* <div className="absolute inset-0 bg-black/60" /> */}
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* Blue Overlay */}
-      {/* <div className="absolute inset-0 bg-cyan-950/20" /> */}
+      <div className="absolute inset-0 bg-cyan-950/20" />
 
       {/* Content */}
       <div className="relative z-10 flex h-full justify-center px-6 mt-10 md:mt-20 ">
