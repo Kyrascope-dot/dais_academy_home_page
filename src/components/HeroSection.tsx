@@ -28,11 +28,11 @@ export default function HeroSection() {
         />
 
         {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/60" />
+        {/* <div className="absolute inset-0 bg-black/60" /> */}
       </div>
 
       {/* Blue Overlay */}
-      <div className="absolute inset-0 bg-cyan-950/20" />
+      {/* <div className="absolute inset-0 bg-cyan-950/20" /> */}
 
       {/* Content */}
       <div className="relative z-10 flex h-full justify-center px-6 mt-10 md:mt-20 ">

@@ -190,7 +190,8 @@
 //   );
 // }
 
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, X } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
 import doctor1 from "../assets/doctor-men.jpg";
 import doctor2 from "../assets/doctor-women.jpg";
 import doctorLaptop from "../assets/doctor-laptop.jpg";
@@ -234,20 +235,46 @@ const webinars = [
     title: "Tibia Nailing",
     duration: "32 mins",
     image: doctorLaptop,
+    video:
+      "https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4",
   },
   {
     title: "Pedicle Screw Placement",
     duration: "46 mins",
     image: heart,
+    video:
+      "https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4",
   },
   {
     title: "Shoulder Arthroscopy",
     duration: "38 mins",
     image: brain,
+    video:
+      "https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4",
   },
 ];
 
 export default function FacultyAndWebinars() {
+  const [activeVideo, setActiveVideo] = useState<{
+    title: string;
+    video: string;
+  } | null>(null);
+
+  const closeModal = useCallback(() => setActiveVideo(null), []);
+
+  useEffect(() => {
+    if (!activeVideo) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeModal();
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [activeVideo, closeModal]);
+
   return (
     <section className="bg-white py-12 md:py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
@@ -330,44 +357,84 @@ export default function FacultyAndWebinars() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {webinars.map((video) => (
+            {webinars.map((webinar) => (
               <div
-                key={video.title}
-                className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+                key={webinar.title}
+                onClick={() =>
+                  setActiveVideo({
+                    title: webinar.title,
+                    video: webinar.video,
+                  })
+                }
+                className="group cursor-pointer overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
               >
                 <div className="relative h-56 overflow-hidden">
                   <img
-                    src={video.image}
-                    alt={video.title}
+                    src={webinar.image}
+                    alt={webinar.title}
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                   />
 
                   <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
 
-                  <button className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#19446a] shadow-xl transition duration-300 group-hover:scale-110">
+                  <div className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#19446a] shadow-xl transition duration-300 group-hover:scale-110">
                     <Play size={26} fill="currentColor" />
-                  </button>
+                  </div>
 
                   <span className="absolute bottom-5 right-5 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold">
-                    {video.duration}
+                    {webinar.duration}
                   </span>
                 </div>
 
                 <div className="p-7">
                   <h3 className="text-lg font-bold text-slate-900">
-                    {video.title}
+                    {webinar.title}
                   </h3>
 
-                  <button className="mt-6 flex items-center gap-2 font-semibold text-[#19446a] transition-all group-hover:gap-3">
+                  <span className="mt-6 flex items-center gap-2 font-semibold text-[#19446a] transition-all group-hover:gap-3">
                     Watch Webinar
                     <ArrowRight size={18} />
-                  </button>
+                  </span>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+
+      {/* Video Modal */}
+      {activeVideo && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          onClick={closeModal}
+        >
+          <div
+            className="relative w-[90vw] max-w-4xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={closeModal}
+              className="absolute -top-12 right-0 flex items-center gap-2 text-white/80 transition hover:text-white"
+            >
+              <span className="text-sm font-medium">Close</span>
+              <X size={24} />
+            </button>
+
+            <h3 className="absolute -top-12 left-0 text-lg font-semibold text-white">
+              {activeVideo.title}
+            </h3>
+
+            <div className="overflow-hidden rounded-2xl bg-black shadow-2xl">
+              <video
+                src={activeVideo.video}
+                controls
+                autoPlay
+                className="h-auto w-full"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
