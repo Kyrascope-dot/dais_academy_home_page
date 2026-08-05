@@ -229,15 +229,6 @@ const faculty = [
 ];
 /* ============================================================ */
 
-const accentMap = {
-  blue: { corner: "border-t-blue-600", name: "text-blue-700" },
-  cyan: { corner: "border-t-cyan-600", name: "text-cyan-700" },
-  indigo: { corner: "border-t-indigo-600", name: "text-indigo-700" },
-  emerald: { corner: "border-t-emerald-600", name: "text-emerald-700" },
-  amber: { corner: "border-t-amber-600", name: "text-amber-700" },
-  rose: { corner: "border-t-rose-600", name: "text-rose-700" },
-};
-
 const webinars = [
   {
     title: "Tibia Nailing",
@@ -280,7 +271,6 @@ export default function FacultyAndWebinars() {
 
           <div className="grid gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {faculty.map((doctor) => {
-              const accent = accentMap[doctor.accent] ?? accentMap.blue;
               return (
                 <div
                   key={doctor.name}
