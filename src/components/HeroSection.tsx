@@ -24,7 +24,7 @@ export default function HeroSection() {
           playsInline
           preload="auto"
           className="absolute inset-0 h-full w-full object-cover"
-          src="https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4"
+          src="/research-and-innovation.mp4"
         />
 
         {/* Dark Overlay */}
