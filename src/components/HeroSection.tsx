@@ -31,7 +31,7 @@ export default function HeroSection() {
       {/* Background Video */}
 
       <div className="absolute inset-0 overflow-hidden">
-        <video
+        {/* <video
           ref={videoRef}
           autoPlay
           muted
@@ -39,6 +39,26 @@ export default function HeroSection() {
           playsInline
           preload="metadata"
           className="absolute inset-0 h-full w-full object-cover"
+        >
+          <source
+            src="https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4"
+            type="video/mp4"
+          />
+        </video> */}
+
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls
+          preload="auto"
+          className="absolute inset-0 h-full w-full object-cover"
+          onLoadedData={() => console.log("loaded")}
+          onCanPlay={() => console.log("can play")}
+          onPlay={() => console.log("playing")}
+          onError={(e) => console.log(e.currentTarget.error)}
         >
           <source
             src="https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4"
