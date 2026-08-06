@@ -282,18 +282,16 @@ export default function FacultyAndWebinars() {
         {/* ================= Faculty ================= */}
 
         <div className="mb-12 md:mb-20">
-          <div className="mb-8 md:mb-14 text-center">
-            <span className="rounded-full bg-cyan-50 px-4 py-2 text-xs md:text-sm font-semibold uppercase tracking-[0.25em] text-cyan-600">
-              Faculty
-            </span>
+          <div className="mb-8 md:mb-14 text-left">
+            <div>
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900">
+                Faculty Network
+              </h1>
+              <div className="mt-3 md:mt-4 h-1 w-16 md:w-20 rounded-full bg-[#19446a]" />
+            </div>
 
-            <h2 className="mt-4 md:mt-5 text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900">
-              Faculty Network
-            </h2>
-
-            <p className="mx-auto mt-3 md:mt-5 max-w-2xl text-base md:text-lg text-slate-500">
-              Learn directly from internationally recognized surgeons and
-              researchers across multiple orthopaedic specialties.
+            <p className="mt-2 md:mt-5 max-w-2xl text-base md:text-lg text-slate-500">
+              Surgeon-led, specialty by specialty
             </p>
           </div>
 
@@ -342,19 +340,13 @@ export default function FacultyAndWebinars() {
         {/* ================= Webinars ================= */}
 
         <div>
-          <div className="mb-8 md:mb-14 text-center">
-            <span className="rounded-full bg-cyan-50 px-4 py-2 text-xs md:text-sm font-semibold uppercase tracking-[0.25em] text-cyan-600">
-              Learning
-            </span>
-
-            <h2 className="mt-4 md:mt-5 text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900">
-              Webinars On Demand
-            </h2>
-
-            <p className="mx-auto mt-3 md:mt-5 max-w-2xl text-base md:text-lg text-slate-500">
-              Watch expert-led surgical techniques and educational sessions
-              anytime.
-            </p>
+          <div className="mb-8 md:mb-14 text-left">
+            <div>
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900">
+                Webinars On Demand
+              </h1>
+              <div className="mt-3 md:mt-4 h-1 w-16 md:w-20 rounded-full bg-[#19446a]" />
+            </div>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

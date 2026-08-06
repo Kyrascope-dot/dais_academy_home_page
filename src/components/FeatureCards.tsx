@@ -75,22 +75,19 @@ const features = [
   {
     icon: BadgeCheck,
     title: "Experienced & Certified",
-    description:
-      "Research-based methodology across multiple surgical specialties.",
+    description: "Research-based methodology across multiple specialties.",
     gradient: "from-cyan-500 to-blue-600",
   },
   {
     icon: Target,
     title: "Our Mission",
-    description:
-      "Building a strong community of healthcare professionals through innovation and education.",
+    description: "A strong community of healthcare professionals.",
     gradient: "from-emerald-500 to-teal-600",
   },
   {
     icon: Eye,
     title: "Our Vision",
-    description:
-      "Delivering the best possible care for every patient across the world.",
+    description: "The best care for every patient, everywhere.",
     gradient: "from-violet-500 to-indigo-600",
   },
 ];

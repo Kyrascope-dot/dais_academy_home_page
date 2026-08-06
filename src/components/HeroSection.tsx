@@ -77,8 +77,8 @@ export default function HeroSection() {
 
           {/* Buttons */}
           <div className="mt-4 flex flex-wrap items-center justify-center gap-4">
-            <button className="group flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 py-2 text-sm md:px-6 md:py-3 md:text-base text-white backdrop-blur-md transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-500 hover:shadow-[0_0_30px_rgba(34,211,238,0.4)]">
-              Explore Academy
+            <button className="group flex items-center gap-2 rounded-xl border border-white/20 px-5 py-2 text-sm md:px-6 md:py-3 md:text-base text-white backdrop-blur-md transition-all duration-300 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-500 hover:shadow-[0_0_30px_rgba(34,211,238,0.4)]">
+              Browse Courses
               <ArrowRight
                 size={18}
                 className="transition-transform duration-300 group-hover:translate-x-1"
@@ -86,7 +86,7 @@ export default function HeroSection() {
             </button>
 
             <button className="rounded-xl border border-cyan-500/30 px-5 py-2 text-sm md:px-6 md:py-3 md:text-base text-white transition hover:bg-[#069bb9] hover:text-white">
-              Learn More
+              Explore Research
             </button>
           </div>
         </div>

@@ -255,23 +255,23 @@
 const stats = [
   {
     value: "40+",
-    title: "Workshops Conducted",
-    description: "Hands-on orthopaedic workshops conducted globally.",
+    title: "Workshops Held",
   },
   {
     value: "2,000+",
     title: "Surgeons Trained",
-    description: "Healthcare professionals trained through DAIS programs.",
   },
   {
     value: "30+",
-    title: "Countries",
-    description: "Global network of surgeons and medical institutions.",
+    title: "Countries Reached",
+  },
+  {
+    value: "60+",
+    title: "Faculty Members",
   },
   {
     value: "120+",
-    title: "Clinical Case Studies",
-    description: "Evidence-based surgical research and publications.",
+    title: "Case Studies",
   },
 ];
 
@@ -282,7 +282,7 @@ export default function StatsBanner() {
 
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="rounded-3xl border border-gray-300 bg-white">
-          <div className="grid grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 lg:grid-cols-5">
             {stats.map((item, index) => (
               <div
                 key={item.title}
@@ -308,9 +308,9 @@ export default function StatsBanner() {
                   {item.title}
                 </h3>
 
-                <p className="text-center md:text-left mt-0.5 text-[11px] leading-4 text-slate-500 md:mt-3 md:text-base md:leading-7">
+                {/* <p className="text-center md:text-left mt-0.5 text-[11px] leading-4 text-slate-500 md:mt-3 md:text-base md:leading-7">
                   {item.description}
-                </p>
+                </p> */}
               </div>
             ))}
           </div>

@@ -87,16 +87,17 @@ export default function CTASection() {
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="px-5 py-10 md:px-12 md:py-16 lg:px-20 text-center">
           <span className="inline-flex rounded-full bg-cyan-50 px-4 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-600">
-            Join DAIS Academy
+            About Dais
           </span>
 
           <h2 className="mx-auto mt-4 md:mt-6 max-w-4xl text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
-            Advance Your Surgical Skills
+            Division of Auxein Institute for Surgeons
           </h2>
 
           <p className="mx-auto mt-4 md:mt-6 max-w-2xl text-sm md:text-base lg:text-lg leading-7 md:leading-8 text-slate-600">
-            Join workshops, connect with expert faculty, and access world-class
-            orthopaedic education and research resources.
+            A non-profit research and education platform, developed in
+            partnership with Auxein Medical, Built to give the surgical
+            community open access to training and clinical evidence.
           </p>
 
           {/* CTA Buttons */}
