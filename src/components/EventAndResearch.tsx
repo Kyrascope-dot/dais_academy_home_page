@@ -598,6 +598,11 @@ export default function EventsAndResearch() {
               Events and Courses
             </h1>
             <div className="mt-3 md:mt-4 h-1 w-16 md:w-20 rounded-full bg-[#19446a]" />
+
+            <p className="mt-2 md:mt-5 max-w-2xl text-base md:text-lg text-slate-500">
+              Explore our hands-on workshops, training programs, and educational
+              events.
+            </p>
           </div>
 
           <div className="flex gap-2">
@@ -677,7 +682,7 @@ export default function EventsAndResearch() {
         <div className="mb-6 md:mb-10 flex flex-wrap items-start justify-between gap-4 md:gap-6">
           <div>
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900">
-              Research
+              Research and Case Studies
             </h1>
             <div className="mt-3 md:mt-4 h-1 w-16 md:w-20 rounded-full bg-[#19446a]" />
 

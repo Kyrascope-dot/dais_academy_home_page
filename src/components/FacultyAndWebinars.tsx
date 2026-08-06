@@ -347,6 +347,10 @@ export default function FacultyAndWebinars() {
               </h1>
               <div className="mt-3 md:mt-4 h-1 w-16 md:w-20 rounded-full bg-[#19446a]" />
             </div>
+            <p className="mt-3 md:mt-5 max-w-2xl text-base md:text-lg text-slate-500">
+              Watch expert-led surgical techniques and educational sessions
+              anytime, anywhere.
+            </p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

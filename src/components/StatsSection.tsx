@@ -300,11 +300,11 @@ export default function StatsBanner() {
                   <div className="absolute bottom-0 left-1/2 h-px w-4/5 -translate-x-1/2 bg-slate-200 lg:hidden" />
                 )}
 
-                <h2 className="text-center md:text-left text-xl font-extrabold tracking-tight text-[#19446a] transition group-hover:scale-105 md:text-2xl lg:text-4xl xl:text-6xl">
+                <h2 className="text-center md:text-left text-xl font-extrabold tracking-tight text-[#19446a] transition group-hover:scale-105 md:text-2xl lg:text-4xl xl:text-5xl">
                   {item.value}
                 </h2>
 
-                <h3 className="text-center md:text-left mt-0.5 text-xs font-semibold leading-4 md:mt-4 md:text-lg md:leading-normal lg:mt-6 lg:text-xl">
+                <h3 className="text-center md:text-left mt-0.5 text-xs font-semibold leading-4 md:mt-2 md:text-lg md:leading-normal lg:mt-4 lg:text-[16px]">
                   {item.title}
                 </h3>
 
