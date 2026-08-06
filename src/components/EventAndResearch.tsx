@@ -526,19 +526,19 @@ const studies = [
     image: doctorLaptop,
   },
   {
-    category: "3D Printing",
-    title: "Personalized surgical guides for osteotomy",
-    image: heart,
+    category: "Spine",
+    title: "3.5mm Wise-Lock compression plate technique",
+    image: brain,
   },
   {
     category: "Trauma",
-    title: "Minimally invasive plate osteosynthesis",
-    image: bone,
+    title: "Patient-specific 3D printed implant",
+    image: doctorOperation,
   },
   {
-    category: "Spine",
-    title: "Pedicle screw navigation accuracy",
-    image: doctorOperation,
+    category: "Sports Medicine",
+    title: "Arthroscopic repair outcomes",
+    image: doctorLaptop,
   },
 ];
 
@@ -682,6 +682,11 @@ export default function EventsAndResearch() {
               Research
             </h1>
             <div className="mt-3 md:mt-4 h-1 w-16 md:w-20 rounded-full bg-[#19446a]" />
+
+            <p className="mt-2 md:mt-5 max-w-2xl text-base md:text-lg text-slate-500">
+              Pre-clinical R&D, device investigation and clinical outcomes, in
+              partnership with universities and research institutes.
+            </p>
           </div>
 
           <div className="flex flex-wrap gap-2">
