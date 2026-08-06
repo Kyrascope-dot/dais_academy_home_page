@@ -548,7 +548,7 @@ function useDotButtons(emblaApi: ReturnType<typeof useEmblaCarousel>[1]) {
 
   const onDotClick = useCallback(
     (index: number) => emblaApi?.scrollTo(index),
-    [emblaApi]
+    [emblaApi],
   );
 
   useEffect(() => {
@@ -568,11 +568,11 @@ function useDotButtons(emblaApi: ReturnType<typeof useEmblaCarousel>[1]) {
 export default function EventsAndResearch() {
   const [eventsRef, eventsApi] = useEmblaCarousel(
     { loop: true, align: "start", dragFree: false },
-    [Autoplay({ delay: 3000, stopOnInteraction: false })]
+    [Autoplay({ delay: 3000, stopOnInteraction: false })],
   );
   const [studiesRef, studiesApi] = useEmblaCarousel(
     { loop: true, align: "start", dragFree: false },
-    [Autoplay({ delay: 3000, stopOnInteraction: false })]
+    [Autoplay({ delay: 3000, stopOnInteraction: false })],
   );
 
   const [activeCategory, setActiveCategory] = useState("All");
@@ -630,7 +630,7 @@ export default function EventsAndResearch() {
                     <img
                       src={event.image}
                       alt={event.title}
-                      className="h-48 w-full object-contain transition-transform duration-500 group-hover:scale-105 rounded-2xl"
+                      className="h-26.75 w-full object-contain rounded-2xl"
                     />
 
                     <div className="flex flex-1 flex-col justify-between">
@@ -650,7 +650,9 @@ export default function EventsAndResearch() {
                         </div>
                       </div>
                     </div>
-                    <div className="absolute -right-130 -bottom-130 group-hover:-right-32 group-hover:-bottom-32 h-160 w-160 rounded-full bg-[#19446a] group-hover:bg-[#19446a]/5 transition-all duration-800" />
+                    {/* <div className="pointer-events-none absolute -bottom-10 -right-10 h-24 w-24 rounded-full bg-[#19446a] scale-100 group-hover:scale-[3] group-hover:bg-[#19446a]/5 transition-all duration-700 ease-out will-change-transform" /> */}
+
+                    <div className="absolute -right-130 -bottom-130  group-hover:-right-32 group-hover:-bottom-32 h-160 w-160 rounded-full bg-[#19446a] group-hover:bg-[#19446a]/5 transition-all duration-800" />
                   </div>
                 </div>
               ))}
@@ -728,7 +730,8 @@ export default function EventsAndResearch() {
                       </button>
                     </div>
                   </div>
-                  <div className="absolute -right-130 -bottom-130 group-hover:-right-32 group-hover:-bottom-32 h-160 w-160 rounded-full bg-[#19446a] group-hover:bg-[#19446a]/5 transition-all duration-800" />
+                  {/* <div className="pointer-events-none absolute -bottom-10 -right-10 h-24 w-24 rounded-full bg-[#19446a] scale-100 group-hover:scale-[3] group-hover:bg-[#19446a]/5 transition-all duration-700 ease-out will-change-transform" /> */}
+                  <div className="absolute -right-130 -bottom-130  group-hover:-right-32 group-hover:-bottom-32 h-160 w-160 rounded-full bg-[#19446a] group-hover:bg-[#19446a]/5 transition-all duration-800" />
                 </div>
               </div>
             ))}

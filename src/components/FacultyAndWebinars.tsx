@@ -235,13 +235,15 @@ const webinars = [
     title: "Tibia Nailing",
     duration: "32 mins",
     image: doctorLaptop,
-    video: "/research-and-innovation.mp4",
+    video:
+      "https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4",
   },
   {
     title: "Pedicle Screw Placement",
     duration: "46 mins",
     image: heart,
-    video: "/research-and-innovation.mp4",
+    video:
+      "https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4",
   },
   {
     title: "Shoulder Arthroscopy",

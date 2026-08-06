@@ -286,7 +286,7 @@ export default function StatsBanner() {
             {stats.map((item, index) => (
               <div
                 key={item.title}
-                className="group relative px-4 py-4 transition duration-500 md:px-6 md:py-10 lg:px-8 lg:py-12"
+                className="group relative px-3 py-3 transition duration-500 md:px-6 md:py-10 lg:px-8 lg:py-12"
               >
                 {/* Vertical divider — mobile: between col 1 & 2, desktop: between all */}
                 {index % 2 !== 0 && (
@@ -304,11 +304,11 @@ export default function StatsBanner() {
                   {item.value}
                 </h2>
 
-                <h3 className="text-center md:text-left mt-1 text-sm font-semibold md:mt-4 md:text-lg lg:mt-6 lg:text-xl">
+                <h3 className="text-center md:text-left mt-0.5 text-xs font-semibold leading-4 md:mt-4 md:text-lg md:leading-normal lg:mt-6 lg:text-xl">
                   {item.title}
                 </h3>
 
-                <p className="text-center md:text-left mt-1 text-xs leading-5 text-slate-500 md:mt-3 md:text-base md:leading-7">
+                <p className="text-center md:text-left mt-0.5 text-[11px] leading-4 text-slate-500 md:mt-3 md:text-base md:leading-7">
                   {item.description}
                 </p>
               </div>
