@@ -277,11 +277,11 @@ const stats = [
 
 export default function StatsBanner() {
   return (
-    <section className="relative overflow-hidden py-12 md:py-16 lg:py-24">
+    <section className="relative overflow-hidden py-12 md:py-16">
       {/* Background */}
 
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="rounded-3xl border border-gray-300 bg-white">
+        <div className="rounded-3xl bg-white">
           <div className="grid grid-cols-2 lg:grid-cols-5">
             {stats.map((item, index) => (
               <div
@@ -307,13 +307,10 @@ export default function StatsBanner() {
                 <h3 className="text-center md:text-left mt-0.5 text-xs font-semibold leading-4 md:mt-2 md:text-lg md:leading-normal lg:mt-4 lg:text-[16px]">
                   {item.title}
                 </h3>
-
-                {/* <p className="text-center md:text-left mt-0.5 text-[11px] leading-4 text-slate-500 md:mt-3 md:text-base md:leading-7">
-                  {item.description}
-                </p> */}
               </div>
             ))}
           </div>
+          <div className="mt-8 h-2 w-full bg-[#19446a] transition-all duration-500 group-hover:w-full" />
         </div>
       </div>
     </section>

@@ -472,38 +472,46 @@ const events = [
     location: "NANO Medical GmbH, Wasserweg 11, 64521, GroB-Gerau, Germany",
     title: "Knee & shoulder arthroscopy workshop",
     image: julyImg,
+    time: "Past" as const,
   },
   {
     date: "27-28 August",
     location: "NANO Medical GmbH, Wasserweg 11, 64521, GroB-Gerau, Germany",
     title: "Nailing and foot & ankle, trauma specimen course",
     image: augustImg,
+    time: "Upcoming" as const,
   },
   {
     date: "24-25 September",
     location: "NANO Medical GmbH, Wasserweg 11, 64521, GroB-Gerau, Germany",
     title: "Knee + HTO & shoulder arthroscopy workshop",
     image: septemberImage,
+    time: "Upcoming" as const,
   },
   {
     date: "26-27 October",
     location: "NANO Medical GmbH, Wasserweg 11, 64521, GroB-Gerau, Germany",
     title: "Nailing and foot & ankle, trauma specimen course",
     image: octoberImage,
+    time: "Upcoming" as const,
   },
   {
     date: "20-21 November",
     location: "NANO Medical GmbH, Wasserweg 11, 64521, GroB-Gerau, Germany",
     title: "Knee & shoulder arthroscopy workshop",
     image: novemberImage,
+    time: "Upcoming" as const,
   },
   {
     date: "11-12 December",
     location: "NANO Medical GmbH, Wasserweg 11, 64521, GroB-Gerau, Germany",
     title: "Knee + HTO & shoulder arthroscopy workshop",
     image: decemberImage,
+    time: "Upcoming" as const,
   },
 ];
+
+const eventFilters = ["All", "Past", "Present", "Upcoming"] as const;
 
 const categories = ["All", "Trauma", "Spine", "Sports Medicine", "3D Printing"];
 
@@ -573,12 +581,22 @@ export default function EventsAndResearch() {
     [Autoplay({ delay: 3000, stopOnInteraction: false })],
   );
 
+  const [activeEventFilter, setActiveEventFilter] = useState<string>("All");
   const [activeCategory, setActiveCategory] = useState("All");
+
+  const filteredEvents =
+    activeEventFilter === "All"
+      ? events
+      : events.filter((e) => e.time === activeEventFilter);
 
   const filteredStudies =
     activeCategory === "All"
       ? studies
       : studies.filter((s) => s.category === activeCategory);
+
+  useEffect(() => {
+    if (eventsApi) eventsApi.reInit();
+  }, [filteredEvents, eventsApi]);
 
   const eventsDots = useDotButtons(eventsApi);
   const studiesDots = useDotButtons(studiesApi);
@@ -592,7 +610,7 @@ export default function EventsAndResearch() {
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         {/* ================= Events ================= */}
 
-        <div className="mb-8 md:mb-14 flex items-end justify-between">
+        <div className="mb-8 md:mb-14 flex flex-wrap items-start justify-between gap-4 md:gap-6">
           <div>
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900">
               Events and Courses
@@ -605,26 +623,44 @@ export default function EventsAndResearch() {
             </p>
           </div>
 
-          <div className="flex gap-2">
-            <button
-              onClick={() => eventsApi?.scrollPrev()}
-              className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition-colors hover:border-[#19446a] hover:text-[#19446a]"
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              onClick={() => eventsApi?.scrollNext()}
-              className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition-colors hover:border-[#19446a] hover:text-[#19446a]"
-            >
-              <ChevronRight size={18} />
-            </button>
+          <div className="flex items-center gap-4">
+            <div className="flex flex-wrap gap-2">
+              {eventFilters.map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => setActiveEventFilter(filter)}
+                  className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+                    activeEventFilter === filter
+                      ? "border-[#19446a] bg-[#19446a] text-white"
+                      : "border-slate-200 bg-white text-slate-600 hover:border-[#19446a] hover:text-[#19446a]"
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+
+            {/* <div className="flex gap-2">
+              <button
+                onClick={() => eventsApi?.scrollPrev()}
+                className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition-colors hover:border-[#19446a] hover:text-[#19446a]"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                onClick={() => eventsApi?.scrollNext()}
+                className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition-colors hover:border-[#19446a] hover:text-[#19446a]"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div> */}
           </div>
         </div>
 
         <div className="mb-12 md:mb-24">
           <div className="overflow-hidden" ref={eventsRef}>
             <div className="flex gap-6">
-              {events.map((event, index) => (
+              {filteredEvents.map((event, index) => (
                 <div
                   key={index}
                   className="min-w-0 flex-[0_0_100%] sm:flex-[0_0_48%] lg:flex-[0_0_31.5%]"
@@ -638,7 +674,7 @@ export default function EventsAndResearch() {
 
                     <div className="flex flex-1 flex-col justify-between">
                       <div>
-                        <h3 className="mt-2 line-clamp-2 text-lg font-bold">
+                        <h3 className="mt-6 line-clamp-2 text-lg font-bold">
                           {event.title}
                         </h3>
                         <div className="flex flex-col items-start gap-1 text-sm">
@@ -653,9 +689,6 @@ export default function EventsAndResearch() {
                         </div>
                       </div>
                     </div>
-                    {/* <div className="pointer-events-none absolute -bottom-10 -right-10 h-24 w-24 rounded-full bg-[#19446a] scale-100 group-hover:scale-[3] group-hover:bg-[#19446a]/5 transition-all duration-700 ease-out will-change-transform" /> */}
-
-                    <div className="absolute -right-130 -bottom-130  group-hover:-right-32 group-hover:-bottom-32 h-160 w-160 rounded-full bg-[#19446a] group-hover:bg-[#19446a]/5 transition-all duration-800" />
                   </div>
                 </div>
               ))}
@@ -738,8 +771,6 @@ export default function EventsAndResearch() {
                       </button>
                     </div>
                   </div>
-                  {/* <div className="pointer-events-none absolute -bottom-10 -right-10 h-24 w-24 rounded-full bg-[#19446a] scale-100 group-hover:scale-[3] group-hover:bg-[#19446a]/5 transition-all duration-700 ease-out will-change-transform" /> */}
-                  <div className="absolute -right-130 -bottom-130  group-hover:-right-32 group-hover:-bottom-32 h-160 w-160 rounded-full bg-[#19446a] group-hover:bg-[#19446a]/5 transition-all duration-800" />
                 </div>
               </div>
             ))}

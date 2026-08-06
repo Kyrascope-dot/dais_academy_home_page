@@ -343,7 +343,7 @@ export default function FacultyAndWebinars() {
           <div className="mb-8 md:mb-14 text-left">
             <div>
               <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900">
-                Webinars On Demand
+                Webinars
               </h1>
               <div className="mt-3 md:mt-4 h-1 w-16 md:w-20 rounded-full bg-[#19446a]" />
             </div>

@@ -14,13 +14,11 @@ const App = () => {
         <Navbar />
       </div>
 
-      <div className="relative">
-        <HeroSection />
+      <HeroSection />
 
-        <div className="w-full absolute left-1/2 -translate-x-1/2 -bottom-50 md:-bottom-60 z-50">
-          <StatsSection />
-        </div>
-      </div>
+      {/* <div className="w-full absolute left-1/2 -translate-x-1/2 -bottom-50 md:-bottom-60 z-50"> */}
+      <StatsSection />
+      {/* </div> */}
 
       <FeatureCards />
 
