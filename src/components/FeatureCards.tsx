@@ -216,7 +216,7 @@ const features = [
 
 export default function NeumorphismCards() {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-white py-10">
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
         {features.map((item, index) => {
           const Icon = item.icon;
