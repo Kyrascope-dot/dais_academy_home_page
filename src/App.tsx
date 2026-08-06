@@ -17,7 +17,7 @@ const App = () => {
       <div className="relative">
         <HeroSection />
 
-        <div className="w-full absolute left-1/2 -translate-x-1/2 -bottom-70 md:-bottom-80 z-50">
+        <div className="w-full absolute left-1/2 -translate-x-1/2 md:-bottom-60 z-50">
           <StatsSection />
         </div>
       </div>
