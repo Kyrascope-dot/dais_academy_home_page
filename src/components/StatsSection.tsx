@@ -295,8 +295,8 @@ export default function StatsBanner() {
                 {index !== stats.length - 1 && (
                   <div className="absolute right-0 top-1/2 hidden h-48 w-px -translate-y-1/2 bg-slate-300 lg:block" />
                 )}
-                {/* Horizontal divider — mobile only: between row 1 & row 2 */}
-                {index < 2 && (
+                {/* Horizontal divider — mobile only: between rows */}
+                {index < stats.length - 1 && (
                   <div className="absolute bottom-0 left-1/2 h-px w-4/5 -translate-x-1/2 bg-slate-200 lg:hidden" />
                 )}
 
