@@ -41,38 +41,17 @@ export default function HeroSection() {
           className="absolute inset-0 h-full w-full object-cover"
         >
           <source
-            // src="https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4"
-            src="https://youtu.be/aSte18D2_YE?si=t7jHkifyMlxwMcff"
+            src="https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4"
             type="video/mp4"
           />
         </video>
 
-        {/* <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          controls
-          preload="auto"
-          className="absolute inset-0 h-full w-full object-cover"
-          onLoadedData={() => console.log("loaded")}
-          onCanPlay={() => console.log("can play")}
-          onPlay={() => console.log("playing")}
-          onError={(e) => console.log(e.currentTarget.error)}
-        >
-          <source
-            src="https://youtu.be/aSte18D2_YE?si=t7jHkifyMlxwMcff"
-            type="video/mp4"
-          />
-        </video> */}
-
         {/* Dark Overlay */}
-        {/* <div className="absolute inset-0 bg-black/60" /> */}
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* Blue Overlay */}
-      {/* <div className="absolute inset-0 bg-cyan-950/20" /> */}
+      <div className="absolute inset-0 bg-cyan-950/20" />
 
       {/* Content */}
       <div className="relative z-10 flex h-full justify-center px-6 mt-20">
