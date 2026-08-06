@@ -444,13 +444,7 @@
 //   );
 // }
 
-import {
-  ArrowRight,
-  CalendarDays,
-  ChevronLeft,
-  ChevronRight,
-  MapPin,
-} from "lucide-react";
+import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { useState, useCallback, useEffect } from "react";
