@@ -424,12 +424,27 @@ export default function FacultyAndWebinars() {
             </h3>
 
             <div className="overflow-hidden rounded-2xl bg-black shadow-2xl">
-              <video
+              {/* <video
                 src={activeVideo.video}
                 controls
                 autoPlay
                 className="h-auto w-full"
-              />
+              /> */}
+
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+                preload="auto"
+                className="h-auto w-full"
+              >
+                <source
+                  src={activeVideo.video}
+                  // type="video/mp4"
+                />
+              </video>
             </div>
           </div>
         </div>
