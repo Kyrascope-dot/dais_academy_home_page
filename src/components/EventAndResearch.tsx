@@ -465,8 +465,6 @@ import decemberImage from "../assets/events_images/december-image.png";
 import brain from "../assets/brain.jpg";
 import doctorOperation from "../assets/doctor-operation.jpg";
 import doctorLaptop from "../assets/doctor-laptop.jpg";
-import heart from "../assets/heart.jpg";
-import bone from "../assets/bone.jpg";
 
 const events = [
   {
