@@ -193,7 +193,7 @@
 import { ArrowRight, Play, X } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import doctor1 from "../assets/doctor-men.jpg";
-import doctor2 from "../assets/doctor-women.jpg";
+import doctor2 from "../assets/doctor-men-2.jpg";
 import doctorLaptop from "../assets/doctor-laptop.jpg";
 import heart from "../assets/heart.jpg";
 import brain from "../assets/brain.jpg";
