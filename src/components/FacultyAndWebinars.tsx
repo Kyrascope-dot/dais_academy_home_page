@@ -247,7 +247,9 @@ const webinars = [
     title: "Shoulder Arthroscopy",
     duration: "38 mins",
     image: brain,
-    video: "/research-and-innovation.mp4",
+    // video: "/research-and-innovation.mp4",
+    video:
+      "https://kyrascopemedia.com/dais/assets/research-and-innovation-n2F0sQFu.mp4",
   },
 ];
 
