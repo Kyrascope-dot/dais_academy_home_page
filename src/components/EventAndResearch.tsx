@@ -451,13 +451,9 @@ import {
   ChevronRight,
   MapPin,
 } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { useRef, useState } from "react";
-import type { Swiper as SwiperType } from "swiper";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import { useState, useCallback, useEffect } from "react";
 
 import julyImg from "../assets/events_images/july-image.png";
 import augustImg from "../assets/events_images/august-image.png";
@@ -546,15 +542,52 @@ const studies = [
   },
 ];
 
+function useDotButtons(emblaApi: ReturnType<typeof useEmblaCarousel>[1]) {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const onDotClick = useCallback(
+    (index: number) => emblaApi?.scrollTo(index),
+    [emblaApi]
+  );
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    setScrollSnaps(emblaApi.scrollSnapList());
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", onSelect);
+    onSelect();
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
+
+  return { selectedIndex, scrollSnaps, onDotClick };
+}
+
 export default function EventsAndResearch() {
-  const swiperRef = useRef<SwiperType | null>(null);
-  const studySwiperRef = useRef<SwiperType | null>(null);
+  const [eventsRef, eventsApi] = useEmblaCarousel(
+    { loop: true, align: "start", dragFree: false },
+    [Autoplay({ delay: 3000, stopOnInteraction: false })]
+  );
+  const [studiesRef, studiesApi] = useEmblaCarousel(
+    { loop: true, align: "start", dragFree: false },
+    [Autoplay({ delay: 3000, stopOnInteraction: false })]
+  );
+
   const [activeCategory, setActiveCategory] = useState("All");
 
   const filteredStudies =
     activeCategory === "All"
       ? studies
       : studies.filter((s) => s.category === activeCategory);
+
+  const eventsDots = useDotButtons(eventsApi);
+  const studiesDots = useDotButtons(studiesApi);
+
+  useEffect(() => {
+    if (studiesApi) studiesApi.reInit();
+  }, [filteredStudies, studiesApi]);
 
   return (
     <section className="bg-slate-50 py-12 md:py-16 lg:py-20">
@@ -571,13 +604,13 @@ export default function EventsAndResearch() {
 
           <div className="flex gap-2">
             <button
-              onClick={() => swiperRef.current?.slidePrev()}
+              onClick={() => eventsApi?.scrollPrev()}
               className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition-colors hover:border-[#19446a] hover:text-[#19446a]"
             >
               <ChevronLeft size={18} />
             </button>
             <button
-              onClick={() => swiperRef.current?.slideNext()}
+              onClick={() => eventsApi?.scrollNext()}
               className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition-colors hover:border-[#19446a] hover:text-[#19446a]"
             >
               <ChevronRight size={18} />
@@ -586,60 +619,57 @@ export default function EventsAndResearch() {
         </div>
 
         <div className="mb-12 md:mb-24">
-          <Swiper
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            modules={[Navigation, Autoplay, Pagination]}
-            spaceBetween={24}
-            slidesPerView={1}
-            loop={true}
-            speed={600}
-            grabCursor={true}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            pagination={{ clickable: true }}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
-            {events.map((event, index) => (
-              <SwiperSlide key={index}>
-                <div className="group relative flex h-85 flex-col overflow-hidden rounded-3xl  cursor-pointer border border-zinc-300 p-5">
-                  {/* <div className="rounded-2xl border"> */}
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="h-48 w-full object-contain transition-transform duration-500 group-hover:scale-105 rounded-2xl"
-                  />
-                  {/* </div> */}
+          <div className="overflow-hidden" ref={eventsRef}>
+            <div className="flex gap-6">
+              {events.map((event, index) => (
+                <div
+                  key={index}
+                  className="min-w-0 flex-[0_0_100%] sm:flex-[0_0_48%] lg:flex-[0_0_31.5%]"
+                >
+                  <div className="group relative flex h-85 flex-col overflow-hidden rounded-3xl cursor-pointer border border-zinc-300 p-5">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="h-48 w-full object-contain transition-transform duration-500 group-hover:scale-105 rounded-2xl"
+                    />
 
-                  <div className="flex flex-1 flex-col justify-between">
-                    <div>
-                      <h3 className="mt-2 line-clamp-2 text-lg font-bold ">
-                        {event.title}
-                      </h3>
-                      <div className="flex flex-col items-start gap-1 text-sm ">
-                        <span className="flex items-center gap-1.5 font-semibold text-zinc-500">
-                          <CalendarDays size={14} />
-                          {event.date}
-                        </span>
-                        <span className="flex items-start justify-start gap-1.5  text-zinc-500 text-sm">
-                          <MapPin size={14} />
-                          {event.location}
-                        </span>
+                    <div className="flex flex-1 flex-col justify-between">
+                      <div>
+                        <h3 className="mt-2 line-clamp-2 text-lg font-bold">
+                          {event.title}
+                        </h3>
+                        <div className="flex flex-col items-start gap-1 text-sm">
+                          <span className="flex items-center gap-1.5 font-semibold text-zinc-500">
+                            <CalendarDays size={14} />
+                            {event.date}
+                          </span>
+                          <span className="flex items-start justify-start gap-1.5 text-zinc-500 text-sm">
+                            <MapPin size={14} />
+                            {event.location}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                    {/* <div>
-                      <ArrowRight
-                        size={22}
-                        className="text-[#19446a] transition-transform duration-300 group-hover:translate-x-2"
-                      />
-                    </div> */}
+                    <div className="absolute -right-130 -bottom-130 group-hover:-right-32 group-hover:-bottom-32 h-160 w-160 rounded-full bg-[#19446a] group-hover:bg-[#19446a]/5 transition-all duration-800" />
                   </div>
-                  <div className="absolute -right-130 -bottom-130  group-hover:-right-32 group-hover:-bottom-32 h-160 w-160 rounded-full bg-[#19446a] group-hover:bg-[#19446a]/5 transition-all duration-800" />
                 </div>
-              </SwiperSlide>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-6 flex justify-center gap-2">
+            {eventsDots.scrollSnaps.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => eventsDots.onDotClick(index)}
+                className={`h-2.5 w-2.5 rounded-full transition-colors ${
+                  index === eventsDots.selectedIndex
+                    ? "bg-[#19446a]"
+                    : "bg-slate-300"
+                }`}
+              />
             ))}
-          </Swiper>
+          </div>
         </div>
 
         {/* ================= Research ================= */}
@@ -669,59 +699,56 @@ export default function EventsAndResearch() {
           </div>
         </div>
 
-        {/* <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"> */}
-        <Swiper
-          onSwiper={(swiper) => (studySwiperRef.current = swiper)}
-          modules={[Navigation, Autoplay, Pagination]}
-          spaceBetween={24}
-          slidesPerView={1}
-          loop={true}
-          speed={600}
-          grabCursor={true}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
-          breakpoints={{
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
-        >
-          {filteredStudies.map((study, index) => (
-            <SwiperSlide key={index}>
+        <div className="overflow-hidden" ref={studiesRef}>
+          <div className="flex gap-6">
+            {filteredStudies.map((study, index) => (
               <div
                 key={index}
-                className="group relative h-96 overflow-hidden rounded-2xl border border-slate-200 bg-white transition-colors hover:border-[#19446a]"
+                className="min-w-0 flex-[0_0_100%] sm:flex-[0_0_48%] lg:flex-[0_0_31.5%]"
               >
-                <div className="overflow-hidden">
-                  <img
-                    src={study.image}
-                    alt={study.title}
-                    className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-6">
-                  <span className="inline-block rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#19446a]">
-                    {study.category}
-                  </span>
-                  <h3 className="mt-3 text-lg font-bold leading-snug text-slate-900">
-                    {study.title}
-                  </h3>
-                  <div className="mt-4 flex items-center justify-start">
-                    {/* <span className="text-sm text-slate-500">
-                    Research Article
-                  </span> */}
-                    <button className="flex items-center gap-1.5 text-sm font-semibold text-[#19446a] transition-all group-hover:gap-3 absolute left-6 bottom-6">
-                      Read More
-                      <ArrowRight size={16} />
-                    </button>
+                <div className="group relative h-96 overflow-hidden rounded-2xl border border-slate-200 bg-white transition-colors hover:border-[#19446a]">
+                  <div className="overflow-hidden">
+                    <img
+                      src={study.image}
+                      alt={study.title}
+                      className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
                   </div>
+                  <div className="p-6">
+                    <span className="inline-block rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#19446a]">
+                      {study.category}
+                    </span>
+                    <h3 className="mt-3 text-lg font-bold leading-snug text-slate-900">
+                      {study.title}
+                    </h3>
+                    <div className="mt-4 flex items-center justify-start">
+                      <button className="flex items-center gap-1.5 text-sm font-semibold text-[#19446a] transition-all group-hover:gap-3 absolute left-6 bottom-6">
+                        Read More
+                        <ArrowRight size={16} />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="absolute -right-130 -bottom-130 group-hover:-right-32 group-hover:-bottom-32 h-160 w-160 rounded-full bg-[#19446a] group-hover:bg-[#19446a]/5 transition-all duration-800" />
                 </div>
-                <div className="absolute -right-130 -bottom-130  group-hover:-right-32 group-hover:-bottom-32 h-160 w-160 rounded-full bg-[#19446a] group-hover:bg-[#19446a]/5 transition-all duration-800" />
               </div>
-            </SwiperSlide>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6 flex justify-center gap-2">
+          {studiesDots.scrollSnaps.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => studiesDots.onDotClick(index)}
+              className={`h-2.5 w-2.5 rounded-full transition-colors ${
+                index === studiesDots.selectedIndex
+                  ? "bg-[#19446a]"
+                  : "bg-slate-300"
+              }`}
+            />
           ))}
-        </Swiper>
+        </div>
       </div>
-      {/* </div> */}
     </section>
   );
 }
