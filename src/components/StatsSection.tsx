@@ -293,7 +293,7 @@ export default function StatsBanner() {
                   <div className="absolute left-0 top-1/2 h-3/4 w-px -translate-y-1/2 bg-slate-200 lg:hidden" />
                 )}
                 {index !== stats.length - 1 && (
-                  <div className="absolute right-0 top-1/2 hidden h-48 w-px -translate-y-1/2 bg-slate-300 lg:block" />
+                  <div className="absolute right-0 top-1/2 hidden h-36 w-px -translate-y-1/2 bg-slate-300 lg:block" />
                 )}
                 {/* Horizontal divider — mobile only: between rows */}
                 {index < stats.length - 1 && (
